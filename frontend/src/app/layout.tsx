@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import '@/styles/globals.css';
 
 import { Header } from '@/components/Header';
+import { Layout } from '@/components/Layout';
 
 export const metadata: Metadata = {
   title: 'Customer Management',
@@ -18,9 +19,11 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body className="bg-slate-100 text-primary">
         <Header/>
-        <div className='py-20'>
-          {children}
-        </div>
+        <Layout>
+          <div className='py-20'>
+            {children}
+          </div>
+        </Layout>
       </body>
     </html>
   );
