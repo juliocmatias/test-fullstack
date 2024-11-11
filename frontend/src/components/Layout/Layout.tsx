@@ -1,4 +1,4 @@
-import { User } from '@/components/Icons';
+import { UserIcon } from '@/components/Icons';
 
 import * as S from './styles';
 
@@ -10,7 +10,7 @@ export const Layout = ({ children }: LayoutProps) => {
   return (
     <S.Container>
       <S.Content>
-        <User size={25} weight="bold" color="black" />
+        <UserIcon size={25} weight="bold" color="black" />
         <S.Title>Painel de Clientes</S.Title>
       </S.Content>
       {children}
