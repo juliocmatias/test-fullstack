@@ -18,12 +18,8 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className="bg-slate-100 text-primary">
-        <Header/>
-        <Layout>
-          <div className='py-20'>
-            {children}
-          </div>
-        </Layout>
+        <Header />
+        <Layout>{children}</Layout>
       </body>
     </html>
   );

@@ -23,4 +23,5 @@ export const Content = tw.div`
 export const Title = tw.h1`
   ml-2
   text-2xl
+  text-black
 `;
