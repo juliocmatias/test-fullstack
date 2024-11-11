@@ -13,7 +13,7 @@ export const Container = tw.header`
 	transition-all 
 	duration-300 
 	ease-in-out
-`
+`;
 
 export const Content = tw.div`
   flex

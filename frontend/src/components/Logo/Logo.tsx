@@ -5,5 +5,5 @@ export const Logo = () => {
     <div>
       <S.Title>UOU</S.Title>
     </div>
-  )
-}
+  );
+};

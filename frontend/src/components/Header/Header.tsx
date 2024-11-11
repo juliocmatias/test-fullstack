@@ -9,5 +9,5 @@ export const Header = () => {
         <Logo />
       </S.Content>
     </S.Container>
-  )
-}
+  );
+};
