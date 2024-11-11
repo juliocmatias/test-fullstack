@@ -1,3 +1,5 @@
+import { User } from '@/components/Icons';
+
 import * as S from './styles';
 
 type LayoutProps = {
@@ -5,5 +7,13 @@ type LayoutProps = {
 };
 
 export const Layout = ({ children }: LayoutProps) => {
-  return <S.Container>{children}</S.Container>;
+  return (
+    <S.Container>
+      <S.Content>
+        <User size={25} />
+        <S.Title>Painel de Clientes</S.Title>
+      </S.Content>
+      {children}
+    </S.Container>
+  );
 };
