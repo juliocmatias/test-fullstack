@@ -27,6 +27,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/api/utils/baseURLts"
-  ],
+, "src/components/ListClient/ListClient.tsx"  ],
   "exclude": ["node_modules"]
 }

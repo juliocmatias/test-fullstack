@@ -1,7 +1,9 @@
+import { ListClient } from '@/components/ListClient';
+
 export default function Home() {
   return (
     <main>
-      <h1>Hello World!</h1>
+      <ListClient />
     </main>
   );
 }
