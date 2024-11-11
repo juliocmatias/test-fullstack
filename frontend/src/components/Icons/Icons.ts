@@ -1,3 +1,3 @@
 'use client';
 
-export { User as User } from '@phosphor-icons/react';
+export { User as UserIcon, Circle as StatusIcon } from '@phosphor-icons/react';
