@@ -10,5 +10,11 @@
     "tw`([^`]*)", // tw`...`
     "tw\\.[^`]+`([^`]*)`", // tw.xxx<xxx>`...`
     "tw\\(.*?\\).*?`([^`]*)" // tw(Component)<xxx>`...`
+  ],
+  "cSpell.language": "en,pt-BR",
+  "cSpell.words": [
+    "foldit",
+    "Foldit",
+    "tailwindcss"
   ]
 }
