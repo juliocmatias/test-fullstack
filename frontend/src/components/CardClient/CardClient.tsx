@@ -1,5 +1,8 @@
+'use client';
+
 import { StatusEnum } from '@/enums';
 
+import { ButtonSecondary } from '@/components/ButtonSecondary';
 import { StatusIcon } from '@/components/Icons';
 
 import { mapStatusColors } from './utils';
@@ -39,11 +42,12 @@ export const CardClient = ({
         <S.CardClientStatusText>{status}</S.CardClientStatusText>
       </S.CardClientStatus>
 
-      <div>
-        <button className="rounded border border-primaryButton bg-white px-8 py-1 text-primaryButton transition hover:bg-primaryButton hover:text-white">
-          Editar
-        </button>
-      </div>
+      <ButtonSecondary
+        type="button"
+        onClick={() => console.log('Editando cliente...')}
+      >
+        Editar
+      </ButtonSecondary>
     </S.CardClientContainer>
   );
 };
