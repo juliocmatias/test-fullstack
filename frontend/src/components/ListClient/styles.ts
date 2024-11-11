@@ -8,3 +8,9 @@ export const Container = tw.div`
   mb-8
   gap-5
 `;
+
+export const cardListContainer = tw.div`
+  flex
+  flex-col
+  gap-5
+`;

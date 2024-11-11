@@ -16,7 +16,7 @@ export const ListClient = () => {
         />
         <NewClientBtn />
       </S.Container>
-      <div className="mb-8 flex flex-col gap-5">
+      <S.cardListContainer>
         <CardClient
           name={'John Doe'}
           email={'john_doe@test.com'}
@@ -45,7 +45,7 @@ export const ListClient = () => {
           phone={'(11) 12345-1234'}
           status={StatusEnum.DISABLED}
         />
-      </div>
+      </S.cardListContainer>
     </>
   );
 };
