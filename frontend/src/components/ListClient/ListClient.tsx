@@ -1,12 +1,25 @@
+'use client';
+
 import { StatusEnum } from '@/enums';
 
 import { CardClient } from '@/components/CardClient';
 import { HeaderPage } from '@/components/HeaderPage';
 
 import { NewClientBtn } from './components/NewClientBtn';
+import { useListClients } from './hooks';
 import * as S from './styles';
 
 export const ListClient = () => {
+  const { clients, error, loading } = useListClients();
+
+  if (loading) {
+    return <p className="text-primary">Loading...</p>;
+  }
+
+  if (error) {
+    return <p className="text-primary">Error: {error}</p>;
+  }
+
   return (
     <>
       <S.Container>
@@ -17,34 +30,16 @@ export const ListClient = () => {
         <NewClientBtn />
       </S.Container>
       <S.cardListContainer>
-        <CardClient
-          name={'John Doe'}
-          email={'john_doe@test.com'}
-          cpf={'123.123.123-12'}
-          phone={'(11) 12345-1234'}
-          status={StatusEnum.ACTIVE}
-        />
-        <CardClient
-          name={'John Doe'}
-          email={'john_doe@test.com'}
-          cpf={'123.123.123-12'}
-          phone={'(11) 12345-1234'}
-          status={StatusEnum.INACTIVE}
-        />
-        <CardClient
-          name={'John Doe'}
-          email={'john_doe@test.com'}
-          cpf={'123.123.123-12'}
-          phone={'(11) 12345-1234'}
-          status={StatusEnum.WAITING_ACTIVATION}
-        />
-        <CardClient
-          name={'John Doe'}
-          email={'john_doe@test.com'}
-          cpf={'123.123.123-12'}
-          phone={'(11) 12345-1234'}
-          status={StatusEnum.DISABLED}
-        />
+        {clients.map((client) => (
+          <CardClient
+            key={client.id}
+            name={client.name}
+            status={client.status as StatusEnum}
+            email={client.email}
+            cpf={client.cpf}
+            phone={client.phone}
+          />
+        ))}
       </S.cardListContainer>
     </>
   );

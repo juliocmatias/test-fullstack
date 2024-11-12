@@ -13,4 +13,5 @@ export const cardListContainer = tw.div`
   flex
   flex-col
   gap-5
+  mb-5
 `;
