@@ -1,40 +1,55 @@
-import { Clients } from '@/types/Clients';
+import { Client } from '@/types/Clients';
 
-export const mockClients = (): Promise<Clients> => {
+let clients: Client[] = [
+  {
+    id: '1',
+    name: 'John Doe',
+    email: 'john_doe@test.com',
+    cpf: '123.123.123-12',
+    phone: '(11) 12345-1234',
+    status: 'Ativo'
+  },
+  {
+    id: '2',
+    name: 'Jane Doe',
+    email: 'jane_doe@test.com',
+    cpf: '123.123.123-12',
+    phone: '(11) 12345-1234',
+    status: 'Inativo'
+  }
+];
+
+export const mockClients = (): Promise<Client[]> => {
   return new Promise((resolve) => {
-    resolve([
-      {
-        id: '1',
-        name: 'John Doe',
-        email: 'john_doe@test.com',
-        cpf: '123.123.123-12',
-        phone: '(11) 12345-1234',
-        status: 'Ativo'
-      },
-      {
-        id: '2',
-        name: 'John Doe',
-        email: 'john_doe@test.com',
-        cpf: '123.123.123-12',
-        phone: '(11) 12345-1234',
-        status: 'Inativo'
-      },
-      {
-        id: '3',
-        name: 'John Doe',
-        email: 'john_doe@test.com',
-        cpf: '123.123.123-12',
-        phone: '(11) 12345-1234',
-        status: 'Aguardando ativação'
-      },
-      {
-        id: '4',
-        name: 'John Doe',
-        email: 'john_doe@test.com',
-        cpf: '123.123.123-12',
-        phone: '(11) 12345-1234',
-        status: 'Desativado'
-      }
-    ]);
+    resolve(clients);
+  });
+};
+
+export const addMockClient = (client: Client): Promise<Client> => {
+  return new Promise((resolve) => {
+    clients.push(client);
+    resolve(client);
+  });
+};
+
+export const updateMockClient = (
+  id: string,
+  client: Partial<Client>
+): Promise<Client | null> => {
+  return new Promise((resolve) => {
+    const index = clients.findIndex((c) => c.id === id);
+    if (index !== -1) {
+      clients[index] = { ...clients[index], ...client };
+      resolve(clients[index]);
+    } else {
+      resolve(null);
+    }
+  });
+};
+
+export const deleteMockClient = (id: string): Promise<void> => {
+  return new Promise((resolve) => {
+    clients = clients.filter((c) => c.id !== id);
+    resolve();
   });
 };
