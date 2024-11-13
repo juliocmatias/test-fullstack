@@ -9,7 +9,7 @@ import {
 
 import api from './api';
 
-const useMock = process.env.USE_MOCK_CLIENTS === 'true';
+const useMock = process.env.NEXT_PUBLIC_USE_MOCK_CLIENTS === 'true';
 
 export const getClients = async (): Promise<Client[]> => {
   if (useMock) {
