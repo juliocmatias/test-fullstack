@@ -1,5 +1,14 @@
+'use client';
+
+import { useNewClientBtn } from './hooks';
 import * as S from './styles';
 
 export const NewClientBtn = () => {
-  return <S.NewClientBtn>Novo cliente</S.NewClientBtn>;
+  const { handleNavigateToRegister } = useNewClientBtn();
+
+  return (
+    <S.NewClientBtn onClick={handleNavigateToRegister}>
+      Novo cliente
+    </S.NewClientBtn>
+  );
 };
