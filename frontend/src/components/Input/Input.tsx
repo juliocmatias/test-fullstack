@@ -5,7 +5,7 @@ import * as S from './styles';
 type InputProps = {
   label: string;
   placeholder?: string;
-  type?: string;
+  type?: React.HTMLInputTypeAttribute;
   error?: string;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
