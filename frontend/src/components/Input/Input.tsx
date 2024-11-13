@@ -15,12 +15,15 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <S.StyledContainer>
-        <S.StyledLabel htmlFor={inputId}>{label}</S.StyledLabel>
+        <S.StyledLabel htmlFor={inputId} $hasError={!!error}>
+          {label}
+        </S.StyledLabel>
         <S.StyledInput
           id={inputId}
           type={type}
           placeholder={placeholder}
           ref={ref}
+          $hasError={!!error}
           {...props}
         />
         {error && <S.StyledError>{error}</S.StyledError>}

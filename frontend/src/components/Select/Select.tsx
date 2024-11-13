@@ -19,8 +19,10 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
     return (
       <S.StyledContainer>
-        <S.StyledLabel htmlFor={selectId}>{label}</S.StyledLabel>
-        <S.StyledSelect id={selectId} ref={ref} {...props}>
+        <S.StyledLabel htmlFor={selectId} $hasError={!!error}>
+          {label}
+        </S.StyledLabel>
+        <S.StyledSelect id={selectId} ref={ref} $hasError={!!error} {...props}>
           {options.map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}
