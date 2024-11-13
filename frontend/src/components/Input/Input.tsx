@@ -5,7 +5,7 @@ import * as S from './styles';
 type InputProps = {
   label: string;
   placeholder?: string;
-  type?: string; // Adiciona uma prop "type"
+  type?: string;
   error?: string;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
@@ -18,10 +18,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         <S.StyledLabel htmlFor={inputId}>{label}</S.StyledLabel>
         <S.StyledInput
           id={inputId}
-          type={type} // Define o tipo de input
+          type={type}
           placeholder={placeholder}
-          ref={ref} // Passa a referência para o input
-          {...props} // Outros props que venham do componente pai
+          ref={ref}
+          {...props}
         />
         {error && <S.StyledError>{error}</S.StyledError>}
       </S.StyledContainer>
