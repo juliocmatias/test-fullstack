@@ -12,8 +12,8 @@ export default function Register() {
         description="Informe os campos a seguir para criar novo usuário."
       />
       <div>
-        <form className="mb-5">
-          <div className="my-5">
+        <form className="mb-8">
+          <div className="my-10">
             <Input label="Nome" placeholder="Informe seu nome" />
             <Input label="E-mail" placeholder="Informe seu e-mail" />
             <Input label="CPF" placeholder="Informe seu CPF" />
@@ -21,6 +21,7 @@ export default function Register() {
             <Select
               label="Status"
               options={[
+                { label: 'Status', value: '' },
                 { label: 'Ativo', value: 'ativo' },
                 { label: 'Inativo', value: 'inativo' },
                 { label: 'Aguardando ativação', value: 'aguardando_ativacao' },
