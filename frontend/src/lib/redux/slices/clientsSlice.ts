@@ -52,7 +52,7 @@ export const removeClient = createAsyncThunk(
 );
 
 export const clientsSlice = createSlice({
-  name: 'clients',
+  name: 'clientsStore',
   initialState,
   reducers: {},
   extraReducers: (builder) => {

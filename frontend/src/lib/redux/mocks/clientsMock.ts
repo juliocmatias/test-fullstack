@@ -27,7 +27,7 @@ export const mockClients = (): Promise<Client[]> => {
 
 export const addMockClient = (client: Client): Promise<Client> => {
   return new Promise((resolve) => {
-    clients.push(client);
+    clients = [...clients, client];
     resolve(client);
   });
 };
