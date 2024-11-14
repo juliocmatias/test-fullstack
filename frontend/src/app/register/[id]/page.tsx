@@ -5,7 +5,6 @@ export default function RegisterById({ params }: { params: { id: string } }) {
 
   return (
     <main>
-      <h1>Register {id}</h1>
       <Register editClient={true} id={id} />
     </main>
   );

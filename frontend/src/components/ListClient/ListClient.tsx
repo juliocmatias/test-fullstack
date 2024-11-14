@@ -43,7 +43,9 @@ export const ListClient = () => {
           />
         ))}
         {!clients.length && <p>Nenhum cliente cadastrado</p>}
-        {clients.length > 0 && <p>Total de clientes: {clients.length}</p>}
+        {clients.length > 0 && (
+          <p className="mb-10">Total de clientes: {clients.length}</p>
+        )}
       </S.cardListContainer>
     </>
   );
