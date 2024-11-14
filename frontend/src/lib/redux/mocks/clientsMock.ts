@@ -5,16 +5,16 @@ let clients: Client[] = [
     id: '1',
     name: 'John Doe',
     email: 'john_doe@test.com',
-    cpf: '123.123.123-12',
-    phone: '(11) 12345-1234',
+    cpf: '12312312312',
+    phone: '11123451234',
     status: 'Ativo'
   },
   {
     id: '2',
     name: 'Jane Doe',
     email: 'jane_doe@test.com',
-    cpf: '123.123.123-12',
-    phone: '(11) 12345-1234',
+    cpf: '12312312312',
+    phone: '11123451234',
     status: 'Inativo'
   }
 ];
