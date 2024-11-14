@@ -34,6 +34,7 @@ export const ListClient = () => {
         {clients.map((client) => (
           <CardClient
             key={client.id}
+            id={client.id ?? ''}
             name={client.name}
             status={client.status as StatusEnum}
             email={client.email}
@@ -41,6 +42,8 @@ export const ListClient = () => {
             phone={maskPhone(client.phone)}
           />
         ))}
+        {!clients.length && <p>Nenhum cliente cadastrado</p>}
+        {clients.length > 0 && <p>Total de clientes: {clients.length}</p>}
       </S.cardListContainer>
     </>
   );

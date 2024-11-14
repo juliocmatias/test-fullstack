@@ -4,5 +4,6 @@ export const mapStatusColors: Record<StatusEnum, string> = {
   [StatusEnum.ACTIVE]: 'green',
   [StatusEnum.INACTIVE]: 'red',
   [StatusEnum.WAITING_ACTIVATION]: 'yellow',
-  [StatusEnum.DISABLED]: 'gray'
+  [StatusEnum.DISABLED]: 'gray',
+  [StatusEnum.STATUS]: ''
 };

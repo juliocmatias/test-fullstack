@@ -10,14 +10,20 @@ import { Select } from '@/components/Select';
 import { useFormRegister } from './hooks';
 import * as S from './styles';
 
-export const FormRegister = () => {
+type FormRegisterProps = {
+  id?: string;
+};
+
+export const FormRegister = ({ id }: FormRegisterProps) => {
   const {
     handleNavigateToHome,
     errors,
     handleSubmit,
     handleSubmitForm,
-    register
-  } = useFormRegister();
+    register,
+    handleCpfChange,
+    handlePhoneChange
+  } = useFormRegister(id);
 
   return (
     <S.FormContainer onSubmit={handleSubmit(handleSubmitForm)}>
@@ -39,12 +45,14 @@ export const FormRegister = () => {
           label="CPF"
           placeholder="Informe seu CPF"
           {...register('cpf')}
+          onChange={handleCpfChange}
           error={errors.cpf?.message}
         />
         <Input
           label="Telefone"
           placeholder="Informe seu telefone"
           {...register('phone')}
+          onChange={handlePhoneChange}
           error={errors.phone?.message}
         />
         <Select
@@ -55,7 +63,7 @@ export const FormRegister = () => {
         />
       </S.FormFields>
       <S.FormActions>
-        <ButtonPrimary type="submit">Criar</ButtonPrimary>
+        <ButtonPrimary type="submit">{id ? 'Salvar' : 'Criar'}</ButtonPrimary>
         <ButtonSecondary type="button" onClick={handleNavigateToHome}>
           Voltar
         </ButtonSecondary>

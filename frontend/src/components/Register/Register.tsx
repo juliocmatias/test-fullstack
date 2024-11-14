@@ -6,7 +6,7 @@ type RegisterProps = {
   editClient: boolean;
 };
 
-export const Register = ({ editClient }: RegisterProps) => {
+export const Register = ({ editClient, id }: RegisterProps) => {
   const title = editClient ? 'Editar usuário' : 'Novo usuário';
   const description = editClient
     ? 'Informe os campos a seguir para editar usuário.'
@@ -15,7 +15,7 @@ export const Register = ({ editClient }: RegisterProps) => {
   return (
     <>
       <HeaderPage tittle={title} description={description} />
-      <FormRegister />
+      <FormRegister id={id} />
     </>
   );
 };

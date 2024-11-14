@@ -3,7 +3,7 @@ import { Client } from '@/types/Clients';
 
 let clients: Client[] = [
   {
-    id: '1',
+    id: crypto.randomUUID(),
     name: 'John Doe',
     email: 'john_doe@test.com',
     cpf: '12312312312',
@@ -11,7 +11,7 @@ let clients: Client[] = [
     status: StatusEnum.ACTIVE
   },
   {
-    id: '2',
+    id: crypto.randomUUID(),
     name: 'Jane Doe',
     email: 'jane_doe@test.com',
     cpf: '12312312312',
@@ -41,7 +41,11 @@ export const updateMockClient = (
   return new Promise((resolve) => {
     const index = clients.findIndex((c) => c.id === id);
     if (index !== -1) {
-      clients[index] = { ...clients[index], ...client };
+      clients = [
+        ...clients.slice(0, index),
+        { ...clients[index], ...client },
+        ...clients.slice(index + 1)
+      ];
       resolve(clients[index]);
     } else {
       resolve(null);

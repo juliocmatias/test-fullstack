@@ -1,5 +1,7 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 import { StatusEnum } from '@/enums';
 
 import { ButtonSecondary } from '@/components/ButtonSecondary';
@@ -10,6 +12,7 @@ import { mapStatusColors } from './utils';
 import * as S from './styles';
 
 type CardClientProps = {
+  id?: string;
   name: string;
   email: string;
   cpf: string;
@@ -18,6 +21,7 @@ type CardClientProps = {
 };
 
 export const CardClient = ({
+  id,
   name,
   email,
   cpf,
@@ -25,6 +29,15 @@ export const CardClient = ({
   status
 }: CardClientProps) => {
   const colorStatus = mapStatusColors[status] || 'gray';
+
+  const router = useRouter();
+
+  const navigateToRegisterClient = () => {
+    if (id) {
+      router.push(`/register/${id}`);
+    }
+  };
+
   return (
     <S.CardClientContainer>
       <S.CardClientInfo>
@@ -42,10 +55,7 @@ export const CardClient = ({
         <S.CardClientStatusText>{status}</S.CardClientStatusText>
       </S.CardClientStatus>
 
-      <ButtonSecondary
-        type="button"
-        onClick={() => console.log('Editando cliente...')}
-      >
+      <ButtonSecondary type="button" onClick={navigateToRegisterClient}>
         Editar
       </ButtonSecondary>
     </S.CardClientContainer>
