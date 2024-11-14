@@ -1,5 +1,6 @@
 'use client';
 
+import { maskCpf, maskPhone } from '@/constants';
 import { StatusEnum } from '@/enums';
 
 import { CardClient } from '@/components/CardClient';
@@ -36,8 +37,8 @@ export const ListClient = () => {
             name={client.name}
             status={client.status as StatusEnum}
             email={client.email}
-            cpf={client.cpf}
-            phone={client.phone}
+            cpf={maskCpf(client.cpf)}
+            phone={maskPhone(client.phone)}
           />
         ))}
       </S.cardListContainer>

@@ -1,9 +1,15 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { Client } from '@/types';
+import {
+  maskCpf,
+  maskPhone,
+  maskCpfRemove,
+  maskPhoneRemove
+} from '@/constants';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { addClient } from '@/lib/redux';
@@ -15,12 +21,17 @@ export const useFormRegister = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    watch,
+    formState: { errors },
+    setValue
   } = useForm<DataForm>({
     mode: 'all',
     reValidateMode: 'onChange',
     resolver: zodResolver(schema)
   });
+
+  const cpf = watch('cpf');
+  const phone = watch('phone');
 
   const router = useRouter();
 
@@ -29,8 +40,14 @@ export const useFormRegister = () => {
   const handleSubmitForm = (data: DataForm) => {
     const valid = schema.safeParse(data);
     if (valid.success) {
-      const id = Math.random().toString(36).substr(2, 9);
-      dispatch(addClient({ ...data, id } as Client));
+      const { cpf, phone } = data;
+      const newClient = {
+        ...data,
+        cpf: maskCpfRemove(cpf),
+        phone: maskPhoneRemove(phone)
+      };
+
+      dispatch(addClient(newClient));
 
       router.push('/');
     }
@@ -39,6 +56,11 @@ export const useFormRegister = () => {
   const handleNavigateToHome = () => {
     router.push('/');
   };
+
+  useEffect(() => {
+    setValue('cpf', maskCpf(cpf));
+    setValue('phone', maskPhone(phone));
+  }, [cpf, phone, setValue]);
 
   return {
     handleNavigateToHome,

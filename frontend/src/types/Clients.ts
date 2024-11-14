@@ -1,7 +1,9 @@
-type Status = 'Ativo' | 'Inativo' | 'Aguardando ativação' | 'Desativado';
+import { StatusEnum } from '@/enums';
+
+export type Status = (typeof StatusEnum)[keyof typeof StatusEnum];
 
 export type Client = {
-  id: string;
+  id?: string;
   name: string;
   email: string;
   cpf: string;

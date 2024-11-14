@@ -1,3 +1,4 @@
+import { StatusEnum } from '@/enums';
 import { Client } from '@/types/Clients';
 
 let clients: Client[] = [
@@ -7,7 +8,7 @@ let clients: Client[] = [
     email: 'john_doe@test.com',
     cpf: '12312312312',
     phone: '11123451234',
-    status: 'Ativo'
+    status: StatusEnum.ACTIVE
   },
   {
     id: '2',
@@ -15,7 +16,7 @@ let clients: Client[] = [
     email: 'jane_doe@test.com',
     cpf: '12312312312',
     phone: '11123451234',
-    status: 'Inativo'
+    status: StatusEnum.INACTIVE
   }
 ];
 
@@ -26,8 +27,9 @@ export const mockClients = (): Promise<Client[]> => {
 };
 
 export const addMockClient = (client: Client): Promise<Client> => {
+  const id = crypto.randomUUID();
   return new Promise((resolve) => {
-    clients = [...clients, client];
+    clients = [...clients, { ...client, id }];
     resolve(client);
   });
 };

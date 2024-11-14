@@ -18,21 +18,13 @@ export const schema = z
     }),
     cpf: z
       .string()
-      .length(11, {
-        message: 'CPF deve ter exatamente 11 dígitos'
-      })
-      .regex(/^\d+$/, {
-        message: 'CPF deve conter apenas números'
+      .length(14, {
+        message: 'Digite um CPF no tamanho de 14 caracteres Ex: 999.999.999-99'
       })
       .refine(isValidCPF, { message: 'Informe um CPF válido' }),
-    phone: z
-      .string()
-      .length(11, {
-        message: 'Telefone deve ter exatamente 11 dígitos'
-      })
-      .regex(/^\d+$/, {
-        message: 'Telefone deve conter apenas números'
-      }),
+    phone: z.string().length(15, {
+      message: 'Digite um número de telefone válido Ex: (99) 99999-9999'
+    }),
     status: z.nativeEnum(StatusEnum)
   })
   .refine((fields) => fields.status !== StatusEnum.STATUS, {
