@@ -5,9 +5,9 @@ import mapStatusHTTP from '#utils/map_status_http'
 export default class LoginController {
   constructor(private loginService = new LoginService()) {}
 
-  async store({ request, response, auth }: HttpContext) {
+  async store({ request, response }: HttpContext) {
     const { email, password } = request.all()
-    const { status, data } = await this.loginService.store(email, password, auth)
+    const { status, data } = await this.loginService.store(email, password)
     return response.status(mapStatusHTTP(status)).json(data)
   }
 }
