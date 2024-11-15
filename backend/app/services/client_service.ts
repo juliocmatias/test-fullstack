@@ -6,7 +6,7 @@ export default class ClientService {
 
   async index(): Promise<ServiceResponse<Client[]>> {
     try {
-      const clients = await this.client.all()
+      const clients = await this.client.query().orderBy('id', 'asc')
 
       return { status: 'SUCCESSFUL', data: clients }
     } catch (error) {
