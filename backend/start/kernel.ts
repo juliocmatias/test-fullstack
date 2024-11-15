@@ -45,4 +45,5 @@ export const middleware = router.named({
   userValidation: () => import('#middleware/user_validation_middleware'),
   guest: () => import('#middleware/guest_middleware'),
   auth: () => import('#middleware/auth_middleware'),
+  tokenValidation: () => import('#middleware/token_validation_middleware'),
 })

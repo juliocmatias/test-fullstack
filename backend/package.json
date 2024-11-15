@@ -46,6 +46,8 @@
     "@japa/plugin-adonisjs": "^3.0.1",
     "@japa/runner": "^3.1.4",
     "@swc/core": "1.7.26",
+    "@types/bcrypt": "^5.0.2",
+    "@types/bcryptjs": "^2.4.6",
     "@types/luxon": "^3.4.2",
     "@types/node": "^22.7.5",
     "eslint": "^9.12.0",
@@ -62,6 +64,7 @@
     "@adonisjs/lucid": "^21.3.0",
     "@maximemrf/adonisjs-jwt": "^0.2.2",
     "@vinejs/vine": "^2.1.0",
+    "bcrypt": "^5.1.1",
     "luxon": "^3.5.0",
     "mysql2": "^3.11.4",
     "reflect-metadata": "^0.2.2"
