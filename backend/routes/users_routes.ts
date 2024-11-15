@@ -7,5 +7,5 @@ router
   .apiOnly()
   .only(['store', 'update'])
   .where('id', router.matchers.number())
-  .use(['store', 'update'], middleware.userValidation)
+  .use(['store', 'update'], middleware.userValidation())
   .use(['update'], middleware.auth())
