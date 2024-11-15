@@ -8,8 +8,8 @@ export default class extends BaseSchema {
       table.increments('id').notNullable().primary()
       table.string('name').notNullable()
       table.string('email').notNullable().unique()
-      table.string('cpf').notNullable().unique()
-      table.string('phone').notNullable()
+      table.string('cpf', 11).notNullable().unique()
+      table.string('phone', 11).notNullable()
       table
         .enu('status', ['Ativo', 'Inativo', 'Aguardando ativação', 'Desativado'])
         .defaultTo('Aguardando ativação')
