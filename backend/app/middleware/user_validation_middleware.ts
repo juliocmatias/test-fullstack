@@ -1,24 +1,24 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import type { NextFn } from '@adonisjs/core/types/http'
+import { z, ZodError } from 'zod'
 
 export default class UsersMiddleware {
   async handle(ctx: HttpContext, next: NextFn) {
-    const { email, password, fullName } = ctx.request.all()
+    const userSchema = z.object({
+      email: z.string().email('Invalid format for email'),
+      password: z.string().min(5, 'Password must be at least 5 characters'),
+      fullName: z.string().min(3, 'Full name must be at least 3 characters'),
+    })
 
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-
-    if (email && !emailPattern.test(email)) {
-      return ctx.response.badRequest({ message: 'Invalid format for email' })
+    try {
+      userSchema.parse(ctx.request.all())
+      return await next()
+    } catch (error) {
+      if (error instanceof ZodError) {
+        const { message } = error.errors[0]
+        return ctx.response.badRequest({ message })
+      }
+      return ctx.response.internalServerError({ message: 'Unexpected error' })
     }
-
-    if (password && password.length < 5) {
-      return ctx.response.badRequest({ message: 'Password must be at least 5 characters' })
-    }
-
-    if (fullName && fullName.length < 3) {
-      return ctx.response.badRequest({ message: 'Full name must be at least 3 characters' })
-    }
-
-    await next()
   }
 }
