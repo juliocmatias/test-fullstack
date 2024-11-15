@@ -1,9 +1,14 @@
 import User from '#models/user'
 import { ServiceResponse } from '#interfaces/service_response'
 import { UserWithPassword } from '#interfaces/users/user_with_pass'
+import bcrypt from 'bcrypt'
 
 export default class UserService {
-  constructor(private userModel = User) {}
+  private SALT_ROUNDS = Number.parseInt(process.env.BCRYPT_SALT_ROUNDS || '10', 10)
+  constructor(
+    private userModel = User,
+    private hashBcrypt = bcrypt
+  ) {}
 
   async store(data: User): Promise<ServiceResponse<UserWithPassword>> {
     try {
@@ -19,7 +24,7 @@ export default class UserService {
 
       const newUser = await this.userModel.create({
         email: data.email,
-        password: data.password,
+        password: await this.hashedPassword(data.password),
         fullName: data.fullName,
       })
 
@@ -46,7 +51,7 @@ export default class UserService {
       }
 
       if (data.password) {
-        user.password = data.password
+        user.password = await this.hashedPassword(data.password)
       }
 
       if (data.fullName) {
@@ -59,6 +64,10 @@ export default class UserService {
     } catch (error) {
       return this.handleError(error)
     }
+  }
+
+  private hashedPassword(password: string): Promise<string> {
+    return this.hashBcrypt.hash(password, this.SALT_ROUNDS)
   }
 
   private userWithPassword(user: User): UserWithPassword {
