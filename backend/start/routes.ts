@@ -12,6 +12,6 @@ import '#routes/users_routes'
 
 router.get('/', async () => {
   return {
-    hello: 'world',
+    ok: true,
   }
 })
