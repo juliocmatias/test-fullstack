@@ -33,23 +33,27 @@ export default class ClientService {
     }
   }
 
-  async update(id: number, data: Client): Promise<ServiceResponse<Client>> {
+  async update(id: number, data: Client): Promise<ServiceResponse<{ message: string }>> {
     try {
-      let client = await this.client.find(id)
+      const client = await this.client.find(id)
 
       if (!client) {
         return this.badRequest('Client not found')
+      }
+
+      if (data.cpf) {
+        return this.badRequest('CPF cannot be changed')
       }
 
       if (await this.verifyIfClientAlreadyExists(data)) {
         return this.conflict('Client already exists')
       }
 
-      client = await this.changeClient(client, data)
+      await this.changeClient(client, data)
 
       await client.save()
 
-      return { status: 'SUCCESSFUL', data: client }
+      return { status: 'SUCCESSFUL', data: { message: 'Client updated successfully' } }
     } catch (error) {
       return this.handleError(error)
     }
@@ -74,48 +78,36 @@ export default class ClientService {
   }
 
   private async changeClient(client: Client, data: Client): Promise<Client> {
-    if (data.name) {
-      client.name = data.name
-    }
+    if (data.name) client.name = data.name
 
-    if (data.email) {
-      client.email = data.email
-    }
+    if (data.phone) client.phone = data.phone
 
-    if (data.cpf) {
-      client.cpf = data.cpf
-    }
+    if (data.status) client.status = data.status
 
-    if (data.phone) {
-      client.phone = data.phone
-    }
-
-    if (data.status) {
-      client.status = data.status
-    }
+    if (data.email) client.email = data.email
 
     return client
   }
 
   private async verifyIfClientAlreadyExists(data: Client): Promise<boolean> {
     let isExistingClient = false
-    isExistingClient = (await this.client.findBy('email', data.email)) !== null
-    isExistingClient = isExistingClient || (await this.client.findBy('cpf', data.cpf)) !== null
-    isExistingClient = isExistingClient || (await this.client.findBy('phone', data.phone)) !== null
+    isExistingClient = data.email ? (await this.client.findBy('email', data.email)) !== null : false
+    isExistingClient =
+      isExistingClient || (data.cpf ? (await this.client.findBy('cpf', data.cpf)) !== null : false)
 
     return isExistingClient
   }
 
-  private handleError(error: unknown): ServiceResponse<Client> {
+  private handleError(error: unknown): ServiceResponse<any> {
     const message = error instanceof Error ? error.message : 'Unknown error occurred'
     return { status: 'INTERNAL_SERVER_ERROR', data: { message } }
   }
 
-  private badRequest(message: string): ServiceResponse<Client> {
+  private badRequest(message: string): ServiceResponse<any> {
     return { status: 'BAD_REQUEST', data: { message } }
   }
 
-  private conflict(message: string): ServiceResponse<Client> {
+  private conflict(message: string): ServiceResponse<any> {
     return { status: 'CONFLICT', data: { message } }
   }
 }
