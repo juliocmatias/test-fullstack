@@ -6,16 +6,19 @@ import { z, ZodError } from 'zod'
 export default class ClientValidationMiddleware {
   async handle(ctx: HttpContext, next: NextFn) {
     const clientSchema = z.object({
-      name: z.string().min(3, 'Name must be at least 3 characters'),
-      email: z.string().email('Invalid format for email'),
+      name: z.string().min(3, 'Name must be at least 3 characters').optional(),
+      email: z.string().email('Invalid format for email').optional(),
       cpf: z
         .string()
         .length(11, 'CPF must be at least 11 characters')
-        .refine((cpf) => new CPFValidator(cpf).isValid(), 'Invalid CPF format'),
-      phone: z.string().length(11, 'Phone number must be at least 11 characters'),
-      status: z.enum(['Ativo', 'Inativo', 'Aguardando ativação', 'Desativado'], {
-        message: 'Invalid status',
-      }),
+        .refine((cpf) => new CPFValidator(cpf).isValid(), 'Invalid CPF format')
+        .optional(),
+      phone: z.string().length(11, 'Phone number must be at least 11 characters').optional(),
+      status: z
+        .enum(['Ativo', 'Inativo', 'Aguardando ativação', 'Desativado'], {
+          message: 'Invalid status',
+        })
+        .optional(),
     })
 
     try {
