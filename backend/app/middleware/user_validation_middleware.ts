@@ -4,11 +4,15 @@ import { z, ZodError } from 'zod'
 
 export default class UsersMiddleware {
   async handle(ctx: HttpContext, next: NextFn) {
-    const userSchema = z.object({
-      email: z.string().email('Invalid format for email'),
-      password: z.string().min(5, 'Password must be at least 5 characters'),
-      fullName: z.string().min(3, 'Full name must be at least 3 characters'),
-    })
+    const userSchema = z
+      .object({
+        email: z.string().email('Invalid format for email'),
+        password: z.string().min(5, 'Password must be at least 5 characters'),
+        fullName: z.string().min(3, 'Full name must be at least 3 characters'),
+      })
+      .partial({
+        fullName: true,
+      })
 
     try {
       userSchema.parse(ctx.request.all())
