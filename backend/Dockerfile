@@ -1,7 +1,7 @@
-ARG NODE_IMAGE=node:18-alpine
+ARG NODE_IMAGE=node:22-alpine
 
 FROM $NODE_IMAGE AS base
-RUN apk --no-cache add dumb-init
+RUN apk --no-cache add dumb-init python3 make g++ libc6-compat
 RUN mkdir -p /home/node/app && chown node:node /home/node/app
 WORKDIR /home/node/app
 USER node
@@ -9,7 +9,8 @@ RUN mkdir tmp
 
 FROM base AS dependencies
 COPY --chown=node:node ./package*.json ./
-RUN npm ci
+RUN npm install --no-optional
+RUN npm rebuild bcrypt --build-from-source
 COPY --chown=node:node . .
 
 FROM dependencies AS build
