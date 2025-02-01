@@ -9,7 +9,7 @@ RUN mkdir tmp
 
 FROM base AS dependencies
 COPY --chown=node:node ./package*.json ./
-RUN npm install --no-optional
+RUN npm ci
 RUN npm rebuild bcrypt --build-from-source
 COPY --chown=node:node . .
 
