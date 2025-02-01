@@ -41,10 +41,6 @@ export default class ClientService {
         return this.badRequest('Client not found')
       }
 
-      if (data.cpf) {
-        return this.badRequest('CPF cannot be changed')
-      }
-
       if (await this.verifyIfClientAlreadyExists(data)) {
         return this.conflict('Client already exists')
       }
@@ -83,6 +79,8 @@ export default class ClientService {
     if (data.phone) client.phone = data.phone
 
     if (data.status) client.status = data.status
+
+    if (data.cpf) client.cpf = data.cpf
 
     if (data.email) client.email = data.email
 
