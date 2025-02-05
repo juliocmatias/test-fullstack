@@ -11,7 +11,7 @@ services:
     ports:
       - ${DB_PORT}:3306
     healthcheck:
-      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-u', 'root', "-p${DB_PASSWORD}"]
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-u', '${DB_USER}', '-p${DB_PASSWORD}']
       interval: 1m30s
       timeout: 30s
       retries: 5
@@ -40,7 +40,7 @@ services:
       - ./backend/:/home/node/app
     command: npm run dev
     healthcheck:
-      test: ['CMD', 'curl', '-f', 'http://localhost:${API_PORT}']
+      test: ['CMD', 'curl', '-f', '0.0.0.0:${API_PORT}']
       interval: 1m30s
       timeout: 30s
       retries: 5
@@ -65,7 +65,7 @@ services:
       - ./frontend/:/home/node/app
     command: npm run dev
     healthcheck:
-      test: ['CMD', 'curl', '-f', 'http://localhost:${FRONTEND_PORT}']
+      test: ['CMD', 'curl', '-f', '0.0.0.0:${FRONTEND_PORT}']
       interval: 1m30s
       timeout: 30s
       retries: 5

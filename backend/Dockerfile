@@ -1,7 +1,7 @@
 ARG NODE_IMAGE=node:22-alpine
 
 FROM $NODE_IMAGE AS base
-RUN apk --no-cache add dumb-init python3 make g++ libc6-compat
+RUN apk --no-cache add dumb-init python3 make g++ libc6-compat curl
 RUN mkdir -p /home/node/app && chown node:node /home/node/app
 WORKDIR /home/node/app
 USER node
