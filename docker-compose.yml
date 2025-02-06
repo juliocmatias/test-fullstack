@@ -38,7 +38,7 @@ services:
       - PORT=${API_PORT}
     volumes:
       - ./backend/:/home/node/app
-    command: npm run dev
+    command: sh -c 'npm run dependency && npm run dev'
     healthcheck:
       test: ['CMD', 'curl', '-f', '0.0.0.0:${API_PORT}']
       interval: 1m30s
